@@ -23,7 +23,7 @@ public class CategoriaResource {
 	public ResponseEntity<?> findOne(@PathVariable Long id) {
 		
 		Categoria categoria = categoriaService.findById(id);
-		return categoria != null ? ResponseEntity.ok(categoria) : ResponseEntity.noContent().build();
+		return ResponseEntity.ok(categoria);
 	}
 	
 	
