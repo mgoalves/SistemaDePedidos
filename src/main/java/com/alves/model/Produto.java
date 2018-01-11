@@ -4,10 +4,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -16,18 +19,30 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
-@Table(name = "categoria")
-public class Categoria implements Serializable {
-	
+@Table(name = "Produto")
+public class Produto implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 	
-	//Atributos -------------------------
+	
+	//Atributos ------------------------------------------------
 	private Long id;
 	private String nome;
-	private List<Produto> produtos = new ArrayList<>();
+	private Double preco;
+	private List<Categoria> categorias = new ArrayList<>();
 	
-
-	//Getters and Setters ---------------
+	
+	//Constructors-----------------------------------------------
+	public Produto(Long id, String nome, Double preco) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.preco = preco;
+	}
+	public Produto() {
+	}
+	
+	//Getters and Setters ----------------------------------------
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Long getId() {
@@ -37,9 +52,10 @@ public class Categoria implements Serializable {
 		this.id = id;
 	}
 	
-	@NotNull
 	@NotBlank
+	@NotNull
 	@Size(min = 3, max = 40)
+	@Column(length = 40)
 	public String getNome() {
 		return nome;
 	}
@@ -47,30 +63,32 @@ public class Categoria implements Serializable {
 		this.nome = nome;
 	}
 	
-	@ManyToMany(mappedBy = "categorias")
-	public List<Produto> getProdutos() {
-		return produtos;
+	@Column(scale = 2, precision = 10)
+	public Double getPreco() {
+		return preco;
 	}
-	public void setProdutos(List<Produto> produtos) {
-		this.produtos = produtos;
-	}
-	
-	//Constructor -----------------------
-	public Categoria(Long id, String nome) {
-		super();
-		this.id = id;
-		this.nome = nome;
-	}
-	public Categoria() {
+	public void setPreco(Double preco) {
+		this.preco = preco;
 	}
 	
-	//Equals and HashCode ----------------------------------------------
+	@ManyToMany
+	@JoinTable(name = "Produto_Categoria",
+			joinColumns = @JoinColumn(name = "produto_id"),
+			inverseJoinColumns = @JoinColumn(name = "categoria_id")
+	)
+	public List<Categoria> getCategorias() {
+		return categorias;
+	}
+	public void setCategorias(List<Categoria> categorias) {
+		this.categorias = categorias;
+	}
+	
+	//HashCode and Equal - ID --------------------------------------
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
 	}
 	@Override
@@ -81,17 +99,16 @@ public class Categoria implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Categoria other = (Categoria) obj;
+		Produto other = (Produto) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (nome == null) {
-			if (other.nome != null)
-				return false;
-		} else if (!nome.equals(other.nome))
-			return false;
 		return true;
 	}
+	
+	
+	
+	
 }
