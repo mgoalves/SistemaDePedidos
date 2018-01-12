@@ -22,6 +22,7 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.alves.model.enums.TipoCliente;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 @Entity
@@ -101,6 +102,7 @@ public class Cliente implements Serializable {
 		this.tipo = tipo.getId();
 	}
 	
+	@JsonManagedReference
 	@OneToMany(mappedBy = "cliente")
 	public List<Endereco> getEnderecos() {
 		return enderecos;

@@ -15,6 +15,8 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "Estado")
 public class Estado implements Serializable {
@@ -56,6 +58,7 @@ public class Estado implements Serializable {
 		this.nome = nome;
 	}
 
+	@JsonBackReference
 	@OneToMany(mappedBy = "estado")
 	public List<Cidade> getCidades() {
 		return cidades;

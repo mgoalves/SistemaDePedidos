@@ -14,6 +14,8 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "Cidade")
 public class Cidade implements Serializable {
@@ -56,6 +58,7 @@ public class Cidade implements Serializable {
 		this.nome = nome;
 	}
 
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "estado_id")
 	public Estado getEstado() {
