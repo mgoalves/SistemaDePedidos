@@ -20,9 +20,14 @@ public abstract class Pagamento implements Serializable {
 
 	
 	//Atributos -------------------------------------------------
+	@Id
 	private Long id;
 	private Integer estado;
 	
+	
+	@OneToOne
+	@JoinColumn(name = "pedido_id")
+	@MapsId
 	private Pedido pedido;
 
 	
@@ -37,13 +42,13 @@ public abstract class Pagamento implements Serializable {
 	}
 	
 	//Getters and Setters  ----------------------------------------
-	@Id
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
 	public EstadoPagamento getEstado() {
 		return EstadoPagamento.toEnum(estado);
 	}
@@ -51,9 +56,6 @@ public abstract class Pagamento implements Serializable {
 		this.estado = estado.getCod();
 	}
 	
-	@OneToOne
-	@JoinColumn(name = "pedido_id")
-	@MapsId
 	public Pedido getPedido() {
 		return pedido;
 	}
