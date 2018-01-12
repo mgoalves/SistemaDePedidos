@@ -2,6 +2,8 @@ package com.alves.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -27,7 +30,7 @@ public class Pedido implements Serializable {
 	private Pagamento pagamento;
 	private Cliente cliente;
 	private Endereco endDeEntrega;
-	
+	private Set<ItemPedido> itens = new HashSet<>();
 	
 	//Construtores ----------------------------------------------
 	public Pedido() {
@@ -82,6 +85,15 @@ public class Pedido implements Serializable {
 	public void setEndDeEntrega(Endereco endDeEntrega) {
 		this.endDeEntrega = endDeEntrega;
 	}
+	
+	@OneToMany(mappedBy = "pedido")
+	public Set<ItemPedido> getItens() {
+		return itens;
+	}
+	public void setItens(Set<ItemPedido> itens) {
+		this.itens = itens;
+	}
+	
 	
 	//HashCode and Equals: ID ---------------------------------------
 	@Override
