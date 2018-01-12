@@ -41,6 +41,7 @@ public class Cliente implements Serializable {
 	
 	private List<Endereco> enderecos = new ArrayList<>();
 	private Set<String> telefones = new HashSet<>();
+	private List<Pedido> pedidos =  new ArrayList<>();
 	
 
 	//Constructors -------------------------------
@@ -120,6 +121,13 @@ public class Cliente implements Serializable {
 		this.telefones = telefones;
 	}
 	
+	@OneToMany(mappedBy = "cliente")
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
 	
 	//HashCode and Equals: ID, Email, CPF-CNPJ -----------------------------------
 	@Override

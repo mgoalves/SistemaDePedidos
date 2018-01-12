@@ -40,6 +40,4 @@ public enum TipoCliente {
 		
 		throw new IllegalArgumentException("ID: " + id  + " inválido.");
 	}
-	
-
 }
