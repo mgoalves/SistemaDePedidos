@@ -1,2 +1,3 @@
-# SpringbootIonic3
-Curso de Spring Boot e Ionic 3
+# Sistema de Pedidos
+
+Curso de Spring Boot e Ionic 3 - Prof Nélio Alves
