@@ -91,7 +91,7 @@ public class Produto implements Serializable {
 		this.categorias = categorias;
 	}
 	
-	@OneToMany(mappedBy = "produto")
+	@OneToMany(mappedBy = "id.produto")
 	public Set<ItemPedido> getItens() {
 		return itens;
 	}
@@ -125,14 +125,14 @@ public class Produto implements Serializable {
 	}
 	
 	//Métodos auxliares ---------------------------------------------
-	@JsonIgnore
-	public List<Pedido> getPedidos(){
-		
-		List<Pedido> lista = new ArrayList<>();
-		
-		for(ItemPedido x : itens) {
-			lista.add(x.getPedido());
-		}
-		return lista;
-	}
+//	@JsonIgnore
+//	public List<Pedido> getPedidos(){
+//		
+//		List<Pedido> lista = new ArrayList<>();
+//		
+//		for(ItemPedido x : itens) {
+//			lista.add(x.getPedido());
+//		}
+//		return lista;
+//	}
 }

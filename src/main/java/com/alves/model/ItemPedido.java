@@ -2,12 +2,18 @@ package com.alves.model;
 
 import java.io.Serializable;
 
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Item_Pedido")
 public class ItemPedido implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
 	//Atributos ------------------------------------------
-	private ItemPedidoPK id;
+	private ItemPedidoPK id = new ItemPedidoPK();
 	
 
 	private Double desconto;
@@ -28,6 +34,7 @@ public class ItemPedido implements Serializable {
 	}
 	
 	//Getters and Setters -----------------------------------
+	@EmbeddedId
 	public ItemPedidoPK getId() {
 		return id;
 	}
@@ -53,12 +60,12 @@ public class ItemPedido implements Serializable {
 		this.preco = preco;
 	}
 	//-
-	public Produto getProduto() {
-		return id.getProduto();
-	}
-	public Pedido getPedido() {
-		return id.getPedido();
-	}
+//	public Produto getProduto() {
+//		return id.getProduto();
+//	}
+//	public Pedido getPedido() {
+//		return id.getPedido();
+//	}
 	
 	//HashCode and Equals: ID --------------------------------------
 	@Override

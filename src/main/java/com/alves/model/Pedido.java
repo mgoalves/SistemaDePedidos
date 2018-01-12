@@ -86,7 +86,7 @@ public class Pedido implements Serializable {
 		this.endDeEntrega = endDeEntrega;
 	}
 	
-	@OneToMany(mappedBy = "pedido")
+	@OneToMany(mappedBy = "id.pedido")
 	public Set<ItemPedido> getItens() {
 		return itens;
 	}

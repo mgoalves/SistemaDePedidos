@@ -13,6 +13,7 @@ import com.alves.model.Cidade;
 import com.alves.model.Cliente;
 import com.alves.model.Endereco;
 import com.alves.model.Estado;
+import com.alves.model.ItemPedido;
 import com.alves.model.Pagamento;
 import com.alves.model.PagamentoComBoleto;
 import com.alves.model.PagamentoComCartao;
@@ -25,6 +26,7 @@ import com.alves.repository.CidadeRepository;
 import com.alves.repository.ClienteRepository;
 import com.alves.repository.EnderecoRepository;
 import com.alves.repository.EstadoRepository;
+import com.alves.repository.ItemPedidoRepository;
 import com.alves.repository.PagamentoRepository;
 import com.alves.repository.PedidoRepository;
 import com.alves.repository.ProdutoRepository;
@@ -53,6 +55,8 @@ public class SistemaDePedidosApplication implements CommandLineRunner {
 	private PedidoRepository pedidoRepository;
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
+	@Autowired 
+	private ItemPedidoRepository itemPedidoRepository;
 	
 	@Override
 	public void run(String... arg0) throws Exception {
@@ -103,6 +107,12 @@ public class SistemaDePedidosApplication implements CommandLineRunner {
 		enderecoRepository.save(Arrays.asList(end1, end2));
 		pedidoRepository.save(Arrays.asList(ped1, ped2));
 		pagamentoRepository.save(Arrays.asList(pag1, pag2));
+		
+		ItemPedido it1 = new ItemPedido(p1, ped1, null, 1, 2000.00);
+		ItemPedido it2 = new ItemPedido(p3, ped1, null, 2, 80.00);
+		ItemPedido it3 = new ItemPedido(p2, ped2, 100.00, 1, 800.00);
+		
+		itemPedidoRepository.save(Arrays.asList(it1, it2, it3));
 		
 	}
 }
