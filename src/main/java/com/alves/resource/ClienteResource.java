@@ -22,7 +22,7 @@ public class ClienteResource {
 	//Endpoints --------------------------
 	@GetMapping
 	@RequestMapping("/{id}")
-	public ResponseEntity<?> findOne(@PathVariable Long id) {
+	public ResponseEntity<Cliente> findOne(@PathVariable Long id) {
 		
 		Cliente categoria = clienteService.findById(id);
 		return ResponseEntity.ok(categoria);
