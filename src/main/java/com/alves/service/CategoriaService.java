@@ -1,11 +1,15 @@
 package com.alves.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.alves.exception.ObjectNotFoundException;
 import com.alves.model.Categoria;
+import com.alves.model.dto.CategoriaDTO;
 import com.alves.repository.CategoriaRepository;
 
 @Service
@@ -58,6 +62,21 @@ public class CategoriaService {
 		} catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityViolationException("Esta categoria possui produtos vinculados. Não é possível excluir.");
 		}
+	}
+
+
+	// Lista todas as categorias ------------------------------------
+	/**
+	 * @param none
+	 * @return CategoriaDTO
+	 */
+	public List<CategoriaDTO> findAll() {
+		
+		List<Categoria> list = categoriaRepository.findAll();
+		List<CategoriaDTO> listDto = list.stream()
+										.map(categoria -> new CategoriaDTO(categoria))
+										.collect(Collectors.toList());
+		return listDto;
 	}
 
 }

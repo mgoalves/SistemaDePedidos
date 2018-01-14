@@ -1,6 +1,7 @@
 package com.alves.resource;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.alves.model.Categoria;
+import com.alves.model.dto.CategoriaDTO;
 import com.alves.service.CategoriaService;
 
 @RestController
@@ -57,6 +59,14 @@ public class CategoriaResource {
 		
 		categoriaService.delete(id);
 		return ResponseEntity.noContent().build();
+	}
+	
+	
+	@GetMapping
+	public ResponseEntity<List<CategoriaDTO>> findAll() {
+		
+		List<CategoriaDTO> list = categoriaService.findAll();
+		return ResponseEntity.ok(list);
 	}
 	
 }
