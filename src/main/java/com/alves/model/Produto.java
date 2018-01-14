@@ -22,7 +22,6 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -79,7 +78,7 @@ public class Produto implements Serializable {
 		this.preco = preco;
 	}
 	
-	@JsonBackReference
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "Produto_Categoria",
 			joinColumns = @JoinColumn(name = "produto_id"),

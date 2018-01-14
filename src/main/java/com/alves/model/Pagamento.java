@@ -11,7 +11,7 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
 import com.alves.model.enums.EstadoPagamento;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -26,7 +26,7 @@ public abstract class Pagamento implements Serializable {
 	private Integer estado;
 	
 	
-	@OneToOne @MapsId @JsonBackReference
+	@OneToOne @MapsId @JsonIgnore
 	@JoinColumn(name = "pedido_id")
 	private Pedido pedido;
 

@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Endereco implements Serializable {
@@ -104,7 +104,7 @@ public class Endereco implements Serializable {
 		this.cep = cep;
 	}
 	
-	@JsonBackReference
+	@JsonIgnore
 	@ManyToOne 
 	@JoinColumn(name = "cliente_id")
 	public Cliente getCliente() {

@@ -15,8 +15,6 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 @Entity
 @Table(name = "categoria")
 public class Categoria implements Serializable {
@@ -49,7 +47,6 @@ public class Categoria implements Serializable {
 		this.nome = nome;
 	}
 	
-	@JsonManagedReference
 	@ManyToMany(mappedBy = "categorias")
 	public List<Produto> getProdutos() {
 		return produtos;
