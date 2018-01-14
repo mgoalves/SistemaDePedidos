@@ -22,7 +22,7 @@ public class PedidoResource {
 	//Endpoints --------------------------
 	@GetMapping
 	@RequestMapping("/{id}")
-	public ResponseEntity<?> findOne(@PathVariable Long id) {
+	public ResponseEntity<Pedido> findOne(@PathVariable Long id) {
 		
 		Pedido categoria = pedidoService.findById(id);
 		return ResponseEntity.ok(categoria);

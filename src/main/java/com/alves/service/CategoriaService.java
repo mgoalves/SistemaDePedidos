@@ -28,4 +28,23 @@ public class CategoriaService {
 		return categoria;
 	}
 
+
+	//Salvar uma nova categoria
+	public Categoria save(Categoria categoria) {
+		
+		categoria.setId(null);
+		
+		return categoriaRepository.save(categoria);
+	}
+
+
+	//Atualiza uma categoria
+	public Categoria update(Long id, Categoria categoria) {
+		
+		findById(id);
+		Categoria cat = categoriaRepository.save(categoria);
+		
+		return cat;
+	}
+
 }
