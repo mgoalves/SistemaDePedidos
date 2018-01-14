@@ -1,6 +1,7 @@
 package com.alves.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.alves.exception.ObjectNotFoundException;
@@ -15,7 +16,7 @@ public class CategoriaService {
 	private CategoriaRepository categoriaRepository;
 	
 	
-	//Buscar por ID
+	//Buscar por ID -----------------------------------------------
 	public Categoria findById(Long id){
 		
 		Categoria categoria = categoriaRepository.findOne(id);
@@ -29,22 +30,34 @@ public class CategoriaService {
 	}
 
 
-	//Salvar uma nova categoria
+	//Salvar uma nova categoria -----------------------------------
 	public Categoria save(Categoria categoria) {
 		
 		categoria.setId(null);
-		
 		return categoriaRepository.save(categoria);
 	}
 
 
-	//Atualiza uma categoria
+	//Atualiza uma categoria ---------------------------------------
 	public Categoria update(Long id, Categoria categoria) {
 		
 		findById(id);
+		categoria.setId(id);
 		Categoria cat = categoriaRepository.save(categoria);
 		
 		return cat;
+	}
+
+	// Deleta uma categoria -----------------------------------------
+	public void delete(Long id) {
+		
+		findById(id);
+		
+		try {
+			categoriaRepository.delete(id);
+		} catch (DataIntegrityViolationException e) {
+			throw new DataIntegrityViolationException("Esta categoria possui produtos vinculados. Não é possível excluir.");
+		}
 	}
 
 }

@@ -7,9 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -42,14 +42,21 @@ public class CategoriaResource {
 		return ResponseEntity.created(uri).build();
 	}
 	
-	@PutMapping
-	@RequestMapping("/{id}")
-	public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Categoria categoria) {
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody Categoria categoria) {
 		
 		categoriaService.update(id, categoria);
 		
 		return ResponseEntity.noContent().build();
 	}
 	
+	
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE) 
+	public ResponseEntity<Categoria> delete(@PathVariable Long id) {
+		
+		categoriaService.delete(id);
+		return ResponseEntity.noContent().build();
+	}
 	
 }

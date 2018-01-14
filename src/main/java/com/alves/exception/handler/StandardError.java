@@ -1,6 +1,9 @@
 package com.alves.exception.handler;
 
 import java.io.Serializable;
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class StandardError implements Serializable {
 	
@@ -9,7 +12,9 @@ public class StandardError implements Serializable {
 	//Atributos
 	private Integer status;
 	private String msg;
-	private Long timeStamp;
+	
+	@JsonFormat(pattern = "dd/MM/yy hh:mm")
+	private Date timeStamp;
 	
 	
 	//Contructor
@@ -17,7 +22,7 @@ public class StandardError implements Serializable {
 		super();
 		this.status = status;
 		this.msg = msg;
-		this.timeStamp = timeStamp;
+		this.timeStamp = new Date(timeStamp);
 	}
 
 
@@ -34,10 +39,10 @@ public class StandardError implements Serializable {
 	public void setMsg(String msg) {
 		this.msg = msg;
 	}
-	public Long getTimeStamp() {
+	public Date getTimeStamp() {
 		return timeStamp;
 	}
-	public void setTimeStamp(Long timeStamp) {
+	public void setTimeStamp(Date timeStamp) {
 		this.timeStamp = timeStamp;
 	}
 }
