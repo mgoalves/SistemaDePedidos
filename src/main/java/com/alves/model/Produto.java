@@ -16,6 +16,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -91,6 +92,7 @@ public class Produto implements Serializable {
 		this.categorias = categorias;
 	}
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "id.produto")
 	public Set<ItemPedido> getItens() {
 		return itens;
@@ -125,14 +127,14 @@ public class Produto implements Serializable {
 	}
 	
 	//Métodos auxliares ---------------------------------------------
-//	@JsonIgnore
-//	public List<Pedido> getPedidos(){
-//		
-//		List<Pedido> lista = new ArrayList<>();
-//		
-//		for(ItemPedido x : itens) {
-//			lista.add(x.getPedido());
-//		}
-//		return lista;
-//	}
+	@JsonIgnore @Transient
+	public List<Pedido> getPedidos(){
+		
+		List<Pedido> lista = new ArrayList<>();
+		
+		for(ItemPedido x : itens) {
+			lista.add(x.getPedido());
+		}
+		return lista;
+	}
 }

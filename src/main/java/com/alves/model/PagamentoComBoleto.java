@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 
 import com.alves.model.enums.EstadoPagamento;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class PagamentoComBoleto extends Pagamento{
@@ -25,12 +26,16 @@ public class PagamentoComBoleto extends Pagamento{
 	}
 	
 	//Getters and Setters ---------
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	public Date getDataVencimento() {
 		return dataVencimento;
 	}
 	public void setDataVencimento(Date dataVencimento) {
 		this.dataVencimento = dataVencimento;
 	}
+	
+
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	public Date getDataPagamento() {
 		return dataPagamento;
 	}
