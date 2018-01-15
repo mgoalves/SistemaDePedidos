@@ -5,6 +5,9 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.alves.exception.ObjectNotFoundException;
@@ -78,5 +81,15 @@ public class CategoriaService {
 										.collect(Collectors.toList());
 		return listDto;
 	}
-
+	
+	// Lista as categorias por paginação -----------------------------
+	public Page<CategoriaDTO> pageAll(Integer page, Integer size, String direction, String orderBy){
+		
+		PageRequest pageRequest = new PageRequest(page, size, Direction.valueOf(direction), orderBy);
+		
+		Page<Categoria> list = categoriaRepository.findAll(pageRequest);
+		Page<CategoriaDTO> listDto = list.map(categoria -> new CategoriaDTO(categoria)); 
+		
+		return listDto; 
+	}
 }

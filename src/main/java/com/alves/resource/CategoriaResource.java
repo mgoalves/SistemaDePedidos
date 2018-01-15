@@ -3,7 +3,10 @@ package com.alves.resource;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -35,7 +39,7 @@ public class CategoriaResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Void> insert(@RequestBody Categoria categoria){
+	public ResponseEntity<Void> insert(@Valid @RequestBody Categoria categoria){
 		
 		categoria = categoriaService.save(categoria); // TODO testar endpoint de salvar.
 		
@@ -45,7 +49,7 @@ public class CategoriaResource {
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody Categoria categoria) {
+	public ResponseEntity<Void> update(@PathVariable Long id,  @Valid @RequestBody Categoria categoria) {
 		
 		categoriaService.update(id, categoria);
 		
@@ -67,6 +71,17 @@ public class CategoriaResource {
 		
 		List<CategoriaDTO> list = categoriaService.findAll();
 		return ResponseEntity.ok(list);
+	}
+	
+	@GetMapping
+	@RequestMapping("/page")
+	public ResponseEntity<Page<CategoriaDTO>> pageAll(
+			@RequestParam(value="page", defaultValue="0") 	Integer page, 
+			@RequestParam(value="size", defaultValue="24")  Integer size, 
+			@RequestParam(value="orderBy", defaultValue="nome")  String orderBy, 
+			@RequestParam(value="direction", defaultValue="ASC") String direction) {
+		
+		return ResponseEntity.ok(categoriaService.pageAll(page, size, direction, orderBy));
 	}
 	
 }
