@@ -13,7 +13,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "categoria")
@@ -38,7 +38,7 @@ public class Categoria implements Serializable {
 	}
 	
 	
-	@NotEmpty(message = "Prenchimento obrigatório.")
+	@NotBlank(message = "Prenchimento obrigatório.")
 	@Length(min = 3, max = 40, message = "Tamanho inválido.")
 	@Column(length = 40, nullable = false)
 	public String getNome() {

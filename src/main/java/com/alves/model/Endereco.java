@@ -96,8 +96,8 @@ public class Endereco implements Serializable {
 	}
 	
 	@NotEmpty(message = "Preenchimento obrigatório.")
-	@Length(min = 11, max = 11, message = "Tamanho inválido.")
-    @Column(length = 11, nullable = false)
+	@Length(min = 8, max = 8, message = "Tamanho inválido.")
+    @Column(length = 8, nullable = false)
 	public String getCep() {
 		return cep;
 	}

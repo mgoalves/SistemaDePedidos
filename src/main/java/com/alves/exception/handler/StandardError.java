@@ -24,6 +24,8 @@ public class StandardError implements Serializable {
 		this.msg = msg;
 		this.timeStamp = new Date(timeStamp);
 	}
+	public StandardError() {
+	}
 
 
 	//Getters and Setters
