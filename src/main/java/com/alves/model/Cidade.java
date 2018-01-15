@@ -10,9 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "Cidade")
@@ -46,9 +46,9 @@ public class Cidade implements Serializable {
 		this.id = id;
 	}
 
-	@NotBlank
-	@NotNull
-	@Column(length = 40)
+	@NotEmpty(message = "Não pode ser nulo ou vazio.")
+	@Length(min = 3, max = 40, message = "Tamanho inválido.")
+	@Column(length = 40, nullable = false)
 	public String getNome() {
 		return nome;
 	}

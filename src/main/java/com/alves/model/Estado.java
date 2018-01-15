@@ -11,9 +11,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -48,9 +48,9 @@ public class Estado implements Serializable {
 		this.id = id;
 	}
 	
-	@NotBlank
-	@NotNull
-	@Column(length = 40)
+	@NotEmpty(message = "Preenchimento obrigatório.")
+	@Length(min = 5, max = 40, message = "Tamanho inválido.")
+    @Column(length = 40, nullable = false)
 	public String getNome() {
 		return nome;
 	}

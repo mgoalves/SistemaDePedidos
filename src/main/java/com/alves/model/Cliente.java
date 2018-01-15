@@ -15,11 +15,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import com.alves.model.enums.TipoCliente;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -36,18 +35,19 @@ public class Cliente implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
  
-    @NotBlank
-    @NotNull
-    @Column(length = 40)
+    @NotEmpty(message = "Não pode ser nulo ou vazio.")
+	@Length(min = 2, max = 40, message = "Tamanho inválido.")
+    @Column(length = 40, nullable = false)
     private String nome;
     
-    @Email @NotNull @NotBlank
-    @Column(unique = true, length = 40)
+    @Email @Length(min = 5, max = 40, message = "Tamanho inválido.")
+    @NotEmpty(message = "Preenchimento obrigatório.")
+    @Column(unique = true, length = 40, nullable = false)
     private String email;
     
-    @NotNull
-    @Size(min = 11, max = 14)
-    @Column(length = 14, name = "cpf_cnpj", unique = true)
+    @NotEmpty(message = "Não pode ser nulo ou vazio.")
+	@Length(min = 9, max = 14, message = "Tamanho inválido.")
+    @Column(length = 14, name = "cpf_cnpj", unique = true, nullable = false)
     private String cpfOuCnpj;
     private Integer tipo;
     

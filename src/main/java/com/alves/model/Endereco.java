@@ -9,9 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -58,9 +58,9 @@ public class Endereco implements Serializable {
 		this.id = id;
 	}
 	
-	@NotBlank
-	@NotNull
-	@Column(length = 40)
+	@NotEmpty(message = "Preenchimento obrigatório.")
+	@Length(min = 5, max = 40, message = "Tamanho inválido.")
+    @Column(length = 40, nullable = false)
 	public String getLogradouro() {
 		return logradouro;
 	}
@@ -76,6 +76,7 @@ public class Endereco implements Serializable {
 		this.numero = numero;
 	}
 	
+	@Length(max = 60, message = "Tamanho máximo: 60")
 	@Column(length = 60)
 	public String getComplemento() {
 		return complemento;
@@ -84,9 +85,9 @@ public class Endereco implements Serializable {
 		this.complemento = complemento;
 	}
 	
-	@NotBlank
-	@NotNull
-	@Column(length = 40)
+	@NotEmpty(message = "Preenchimento obrigatório.")
+	@Length(min = 5, max = 40, message = "Tamanho inválido.")
+    @Column(length = 40, nullable = false)
 	public String getBairro() {
 		return bairro;
 	}
@@ -94,9 +95,9 @@ public class Endereco implements Serializable {
 		this.bairro = bairro;
 	}
 	
-	@NotBlank
-	@NotNull
-	@Column(length = 11)
+	@NotEmpty(message = "Preenchimento obrigatório.")
+	@Length(min = 11, max = 11, message = "Tamanho inválido.")
+    @Column(length = 11, nullable = false)
 	public String getCep() {
 		return cep;
 	}
