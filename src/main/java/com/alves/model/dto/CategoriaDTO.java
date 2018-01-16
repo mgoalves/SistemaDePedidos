@@ -2,6 +2,9 @@ package com.alves.model.dto;
 
 import java.io.Serializable;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+
 import com.alves.model.Categoria;
 
 public class CategoriaDTO implements Serializable {
@@ -29,6 +32,9 @@ public class CategoriaDTO implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	@NotBlank(message = "Prenchimento obrigatório.")
+	@Length(min = 3, max = 40, message = "Tamanho inválido.")
 	public String getNome() {
 		return nome;
 	}
