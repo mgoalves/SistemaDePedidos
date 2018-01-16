@@ -46,14 +46,15 @@ public class CategoriaService {
 
 
 	//Atualiza uma categoria ---------------------------------------
-	public Categoria update(Long id, Categoria categoria) {
+	public Categoria update(Long id, CategoriaDTO categoriaDTO) {
 		
-		findById(id);
-		categoria.setId(id);
-		Categoria cat = categoriaRepository.save(categoria);
+		Categoria cat = findById(id);
+		updateData(cat, categoriaDTO);
+		cat = categoriaRepository.save(cat);
 		
 		return cat;
 	}
+
 
 	// Deleta uma categoria -----------------------------------------
 	public void delete(Long id) {
@@ -91,5 +92,13 @@ public class CategoriaService {
 		Page<CategoriaDTO> listDto = list.map(categoria -> new CategoriaDTO(categoria)); 
 		
 		return listDto; 
+	}
+	
+
+	private void updateData(Categoria cat, CategoriaDTO categoriaDTO) {
+		
+		if(categoriaDTO.getNome() != null) {
+			cat.setNome(categoriaDTO.getNome());
+		}
 	}
 }

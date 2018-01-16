@@ -38,9 +38,7 @@ public class ClienteService {
 	public Cliente update(Long id, ClienteDTO clienteDTO) {
 
 		Cliente cliente = findById(id);
-		
 		updateData(cliente, clienteDTO);
-		
 		cliente = clienteRepository.save(cliente);
 
 		return cliente;

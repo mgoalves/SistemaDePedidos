@@ -38,6 +38,7 @@ public class CategoriaResource {
 		return ResponseEntity.ok(categoria);
 	}
 	
+	//Salvar ---------------------------------------------------------------
 	@PostMapping
 	public ResponseEntity<Void> insert(@Valid @RequestBody Categoria categoria){
 		
@@ -48,16 +49,15 @@ public class CategoriaResource {
 		return ResponseEntity.created(uri).build();
 	}
 	
+	//Atualizar -----------------------------------------------------------
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> update(@PathVariable Long id,  @Valid @RequestBody Categoria categoria) {
+	public ResponseEntity<Void> update(@PathVariable Long id,  @Valid @RequestBody CategoriaDTO categoriaDTO) {
 		
-		categoriaService.update(id, categoria);
-		
+		categoriaService.update(id, categoriaDTO);
 		return ResponseEntity.noContent().build();
 	}
 	
-	
-	
+	//Deletar categoria ----------------------------------------------------
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE) 
 	public ResponseEntity<Categoria> delete(@PathVariable Long id) {
 		
@@ -65,7 +65,7 @@ public class CategoriaResource {
 		return ResponseEntity.noContent().build();
 	}
 	
-	
+	//Listar todas categorias ------------------------------------------------
 	@GetMapping
 	public ResponseEntity<List<CategoriaDTO>> findAll() {
 		
@@ -73,6 +73,7 @@ public class CategoriaResource {
 		return ResponseEntity.ok(list);
 	}
 	
+	//Listar com paginação --------------------------------------------------
 	@GetMapping
 	@RequestMapping("/page")
 	public ResponseEntity<Page<CategoriaDTO>> pageAll(
@@ -83,5 +84,4 @@ public class CategoriaResource {
 		
 		return ResponseEntity.ok(categoriaService.pageAll(page, size, direction, orderBy));
 	}
-	
 }
