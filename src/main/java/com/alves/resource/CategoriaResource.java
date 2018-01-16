@@ -30,6 +30,7 @@ public class CategoriaResource {
 	@Autowired
 	private CategoriaService categoriaService;
 
+	//Buscar --------------------------------------------------------------
 	@GetMapping
 	@RequestMapping("/{id}")
 	public ResponseEntity<Categoria> findOne(@PathVariable Long id) {
@@ -42,7 +43,7 @@ public class CategoriaResource {
 	@PostMapping
 	public ResponseEntity<Void> insert(@Valid @RequestBody Categoria categoria){
 		
-		categoria = categoriaService.save(categoria); // TODO testar endpoint de salvar.
+		categoria = categoriaService.save(categoria);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(categoria.getId()).toUri();
 		
