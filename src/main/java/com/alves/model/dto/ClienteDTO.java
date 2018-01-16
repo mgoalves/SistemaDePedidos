@@ -2,6 +2,10 @@ package com.alves.model.dto;
 
 import java.io.Serializable;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import com.alves.model.Cliente;
 
 public class ClienteDTO implements Serializable {
@@ -30,12 +34,16 @@ public class ClienteDTO implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+	@Length(min = 2, max = 40, message = "Tamanho inválido.")
 	public String getNome() {
 		return nome;
-	}
+	}	
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
+	@Email(message = "Email Inválido.") @Length(min = 5, max = 40, message = "Tamanho inválido.")
 	public String getEmail() {
 		return email;
 	}

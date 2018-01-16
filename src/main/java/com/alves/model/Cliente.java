@@ -40,7 +40,7 @@ public class Cliente implements Serializable {
     @Column(length = 40, nullable = false)
     private String nome;
     
-    @Email @Length(min = 5, max = 40, message = "Tamanho inválido.")
+    @Email(message = "Email Inválido.") @Length(min = 5, max = 40, message = "Tamanho inválido.")
     @NotEmpty(message = "Preenchimento obrigatório.")
     @Column(unique = true, length = 40, nullable = false)
     private String email;
@@ -70,8 +70,7 @@ public class Cliente implements Serializable {
         this.nome = nome;
         this.email = email;
         this.cpfOuCnpj = cpfOuCnpj;
-        this.tipo = tipo.getId();
-        System.out.println("VALOR: "+this.tipo);
+        this.tipo = (tipo == null) ? null : tipo.getId();
     }
     public Cliente() {
     }

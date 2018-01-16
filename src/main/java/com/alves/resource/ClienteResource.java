@@ -43,9 +43,9 @@ public class ClienteResource {
 	//Atualizar - PUT ------------------------------------------
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> update(@PathVariable Long id, 
-									   @Valid @RequestBody Cliente cliente) {
+									   @Valid @RequestBody ClienteDTO clienteDTO) {
 		
-		clienteService.update(id, cliente);
+		clienteService.update(id, clienteDTO);
 		return ResponseEntity.noContent().build();
 	}
 	

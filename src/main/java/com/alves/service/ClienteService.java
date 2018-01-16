@@ -35,15 +35,18 @@ public class ClienteService {
 	}
 
 	// Atualiza um cliente ---------------------------------------
-	public Cliente update(Long id, Cliente cliente) {
+	public Cliente update(Long id, ClienteDTO clienteDTO) {
 
-		findById(id);
-		cliente.setId(id);
-		Cliente cli = clienteRepository.save(cliente);
+		Cliente cliente = findById(id);
+		
+		updateData(cliente, clienteDTO);
+		
+		cliente = clienteRepository.save(cliente);
 
-		return cli;
+		return cliente;
 	}
 
+	
 	// Deleta um cliente ------------------------------------------
 	public void delete(Long id) {
 
@@ -52,7 +55,7 @@ public class ClienteService {
 			clienteRepository.delete(id);
 		} catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityViolationException(
-					"Esta categoria possui dados vinculados. Não é possível excluir.");
+					"Este cliente possui dados vinculados. Não é possível excluir.");
 		}
 	}
 
@@ -75,4 +78,22 @@ public class ClienteService {
 		return listDto;
 
 	}
+	
+	@SuppressWarnings("unused")
+	private Cliente fromDTO(ClienteDTO clienteDTO) {
+		
+		return new Cliente(clienteDTO.getId(), clienteDTO.getNome(), clienteDTO.getEmail(), null, null);
+	}
+
+
+	private void updateData(Cliente cliente, ClienteDTO clienteDTO) {
+		
+		if(clienteDTO.getNome() != null) {
+			cliente.setNome(clienteDTO.getNome());
+		}
+		if(clienteDTO.getEmail() != null) {
+			cliente.setEmail(clienteDTO.getEmail());
+		}
+	}
+
 }

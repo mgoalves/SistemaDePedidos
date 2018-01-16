@@ -87,28 +87,32 @@ public class SistemaDePedidosApplication implements CommandLineRunner {
 		Cidade cid2 = new Cidade(null, "Belo Horizonte", est1);		
 		Cidade cid3 = new Cidade(null, "Santos", est2);
 		
-		Cliente cli = new Cliente(null, "Maria", "maria@gmail.com", "1112223334445", TipoCliente.PESSOAFISICA);
-		cli.getTelefones().addAll(Arrays.asList("99998888", "98989898"));
+		Cliente cli1 = new Cliente(null, "Maria", "maria@gmail.com", "1112223334445", TipoCliente.PESSOAFISICA);
+		cli1.getTelefones().addAll(Arrays.asList("99998888", "98989898"));
+		Cliente cli2 = new Cliente(null, "João", "joao@gmail.com", "12345678901", TipoCliente.PESSOAFISICA);
+		Cliente cli3 = new Cliente(null, "José", "jose@gmail.com", "12345678902", TipoCliente.PESSOAFISICA);
+		Cliente cli4 = new Cliente(null, "Pedro", "pedro@gmail.com", "12345678903", TipoCliente.PESSOAFISICA);
+		Cliente cli5 = new Cliente(null, "Gabriel", "gabriel@gmail.com", "12345678904", TipoCliente.PESSOAFISICA);
 		
-		Endereco end1 = new Endereco(null, "Rua 21", "342", null, "Vila Jaragua", "74655090", cli, cid1); 
-		Endereco end2 = new Endereco(null, "Rua Matos", "105", "Apto 400", "Centro", "30270290", cli, cid3);
+		Endereco end1 = new Endereco(null, "Rua 21", "342", null, "Vila Jaragua", "74655090", cli1, cid1); 
+		Endereco end2 = new Endereco(null, "Rua Matos", "105", "Apto 400", "Centro", "30270290", cli1, cid3);
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
-		Pedido ped1 = new Pedido(null, sdf.parse("01/01/2018 00:00"), cli, end1);
-		Pedido ped2 = new Pedido(null, sdf.parse("01/02/2018 00:00"), cli, end2);
+		Pedido ped1 = new Pedido(null, sdf.parse("01/01/2018 00:00"), cli1, end1);
+		Pedido ped2 = new Pedido(null, sdf.parse("01/02/2018 00:00"), cli1, end2);
 		
 		Pagamento pag1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, ped1, 6);
 		ped1.setPagamento(pag1);
 		Pagamento pag2 = new PagamentoComBoleto(null, EstadoPagamento.PENDENTE, ped2, sdf.parse("01/02/2018 10:08"), null);
 		ped2.setPagamento(pag2);
 		
-		cli.getPedidos().addAll(Arrays.asList(ped1, ped2));
+		cli1.getPedidos().addAll(Arrays.asList(ped1, ped2));
 		
 		categoriaRepository.save(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7));
 		produtoRepository.save(Arrays.asList(p1, p2, p3));
 		estadoRepository.save(Arrays.asList(est1, est2));
 		cidadeRepository.save(Arrays.asList(cid1, cid2, cid3));
-		clienteRepository.save(cli);
+		clienteRepository.save(Arrays.asList(cli1, cli2, cli3, cli4, cli5));
 		enderecoRepository.save(Arrays.asList(end1, end2));
 		pedidoRepository.save(Arrays.asList(ped1, ped2));
 		pagamentoRepository.save(Arrays.asList(pag1, pag2));
