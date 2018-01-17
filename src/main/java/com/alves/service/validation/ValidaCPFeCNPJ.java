@@ -1,4 +1,4 @@
-package com.alves.service;
+package com.alves.service.validation;
 
 public class ValidaCPFeCNPJ {
 

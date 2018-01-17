@@ -2,6 +2,7 @@ package com.alves.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.alves.model.Cliente;
 
@@ -11,5 +12,11 @@ import com.alves.model.Cliente;
  */
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Long>{
+
 	
+	@Transactional(readOnly = true)
+	Cliente findByEmail(String email);
+
+	@Transactional(readOnly = true)
+	Cliente findByCpfOuCnpj(String cpfOuCnpj);
 }

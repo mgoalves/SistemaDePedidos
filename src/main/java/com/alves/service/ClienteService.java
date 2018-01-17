@@ -51,19 +51,6 @@ public class ClienteService {
 		
 		Cidade cidade = cidadeRepository.findOne(clienteTelEndDTO.getCidadeId());
 		
-		
-		if(clienteTelEndDTO.getTipo().equals(TipoCliente.PESSOAFISICA.getId()) && 
-				!ValidaCPFeCNPJ.isValidCPF(clienteTelEndDTO.getCpfOuCnpj())) {
-			
-			throw new InvalidAttributeValueException("CPF Inválido");
-		}
-		if(clienteTelEndDTO.getTipo().equals(TipoCliente.PESSOAJURIDICA.getId()) && 
-				!ValidaCPFeCNPJ.isValidCNPJ(clienteTelEndDTO.getCpfOuCnpj())) {
-			
-			throw new InvalidAttributeValueException("CNPJ Inválido");
-		}
-		
-		
 		Cliente cliente = new Cliente(null, clienteTelEndDTO.getNome(), clienteTelEndDTO.getEmail(), 
 										clienteTelEndDTO.getCpfOuCnpj(), TipoCliente.toEnum(clienteTelEndDTO.getTipo()));
 

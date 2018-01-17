@@ -6,6 +6,9 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.alves.service.validation.ClienteInsertAnn;
+
+@ClienteInsertAnn
 public class ClienteTelEndDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
