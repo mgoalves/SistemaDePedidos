@@ -96,6 +96,7 @@ public class SistemaDePedidosApplication implements CommandLineRunner {
 		
 		Endereco end1 = new Endereco(null, "Rua 21", "342", null, "Vila Jaragua", "74655090", cli1, cid1); 
 		Endereco end2 = new Endereco(null, "Rua Matos", "105", "Apto 400", "Centro", "30270290", cli1, cid3);
+		Endereco end3 = new Endereco(null, "Rua Matos", "105", "Apto 400", "Centro", "30270290", cli2, cid3);
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 		Pedido ped1 = new Pedido(null, sdf.parse("01/01/2018 00:00"), cli1, end1);
@@ -113,7 +114,7 @@ public class SistemaDePedidosApplication implements CommandLineRunner {
 		estadoRepository.save(Arrays.asList(est1, est2));
 		cidadeRepository.save(Arrays.asList(cid1, cid2, cid3));
 		clienteRepository.save(Arrays.asList(cli1, cli2, cli3, cli4, cli5));
-		enderecoRepository.save(Arrays.asList(end1, end2));
+		enderecoRepository.save(Arrays.asList(end1, end2, end3));
 		pedidoRepository.save(Arrays.asList(ped1, ped2));
 		pagamentoRepository.save(Arrays.asList(pag1, pag2));
 		
