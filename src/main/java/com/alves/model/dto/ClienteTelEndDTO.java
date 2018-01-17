@@ -2,6 +2,10 @@ package com.alves.model.dto;
 
 import java.io.Serializable;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+
 public class ClienteTelEndDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -29,6 +33,8 @@ public class ClienteTelEndDTO implements Serializable {
 
 	
 	//Getters and Setters  -------------------------------------------
+	@NotBlank(message = "Não pode ser nulo ou vazio.")
+	@Length(min = 2, max = 40, message = "Tamanho inválido.")
 	public String getNome() {
 		return nome;
 	}
@@ -36,6 +42,8 @@ public class ClienteTelEndDTO implements Serializable {
 		this.nome = nome;
 	}
 
+	@Email(message = "Email Inválido.") @Length(min = 5, max = 40, message = "Tamanho inválido.")
+	@NotBlank(message = "Preenchimento obrigatório.")
 	public String getEmail() {
 		return email;
 	}
@@ -43,6 +51,9 @@ public class ClienteTelEndDTO implements Serializable {
 		this.email = email;
 	}
 
+	
+	@NotBlank(message = "Não pode ser nulo ou vazio.")
+	@Length(min = 9, max = 14, message = "Tamanho inválido.")
 	public String getCpfOuCnpj() {
 		return cpfOuCnpj;
 	}
@@ -57,6 +68,9 @@ public class ClienteTelEndDTO implements Serializable {
 		this.tipo = tipo;
 	}
 
+	
+	@NotBlank(message = "Preenchimento obrigatório.")
+	@Length(min = 5, max = 40, message = "Tamanho inválido.")
 	public String getLogradouro() {
 		return logradouro;
 	}
@@ -64,6 +78,7 @@ public class ClienteTelEndDTO implements Serializable {
 		this.logradouro = logradouro;
 	}
 
+	@Length(min = 1, max = 5, message = "Tamanho inválido.")
 	public String getNumero() {
 		return numero;
 	}
@@ -71,6 +86,7 @@ public class ClienteTelEndDTO implements Serializable {
 		this.numero = numero;
 	}
 
+	@Length(max = 60, message = "Tamanho máximo: 60")
 	public String getComplemento() {
 		return complemento;
 	}
@@ -78,6 +94,8 @@ public class ClienteTelEndDTO implements Serializable {
 		this.complemento = complemento;
 	}
 
+	@NotBlank(message = "Preenchimento obrigatório.")
+	@Length(min = 5, max = 40, message = "Tamanho inválido.")
 	public String getBairro() {
 		return bairro;
 	}
@@ -85,6 +103,8 @@ public class ClienteTelEndDTO implements Serializable {
 		this.bairro = bairro;
 	}
 
+	@NotBlank(message = "Preenchimento obrigatório.")
+	@Length(min = 8, max = 8, message = "Tamanho inválido.")
 	public String getCep() {
 		return cep;
 	}
@@ -92,6 +112,8 @@ public class ClienteTelEndDTO implements Serializable {
 		this.cep = cep;
 	}
 
+	@NotBlank(message = "Preenchimento obrigatório.")
+	@Length(min = 8, max = 14, message = "Tamanho inválido.")
 	public String getTelefone1() {
 		return telefone1;
 	}
@@ -99,6 +121,7 @@ public class ClienteTelEndDTO implements Serializable {
 		this.telefone1 = telefone1;
 	}
 
+	@Length(min = 8, max = 14, message = "Tamanho inválido.")
 	public String getTelefone2() {
 		return telefone2;
 	}

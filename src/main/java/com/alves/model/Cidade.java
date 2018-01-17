@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "Cidade")
@@ -46,7 +46,7 @@ public class Cidade implements Serializable {
 		this.id = id;
 	}
 
-	@NotEmpty(message = "Não pode ser nulo ou vazio.")
+	@NotBlank(message = "Não pode ser nulo ou vazio.")
 	@Length(min = 3, max = 40, message = "Tamanho inválido.")
 	@Column(length = 40, nullable = false)
 	public String getNome() {

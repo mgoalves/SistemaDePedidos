@@ -18,7 +18,7 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.NotBlank;
 
 import com.alves.model.enums.TipoCliente;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -35,17 +35,17 @@ public class Cliente implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
  
-    @NotEmpty(message = "Não pode ser nulo ou vazio.")
+    @NotBlank(message = "Não pode ser nulo ou vazio.")
 	@Length(min = 2, max = 40, message = "Tamanho inválido.")
     @Column(length = 40, nullable = false)
     private String nome;
     
     @Email(message = "Email Inválido.") @Length(min = 5, max = 40, message = "Tamanho inválido.")
-    @NotEmpty(message = "Preenchimento obrigatório.")
+    @NotBlank(message = "Preenchimento obrigatório.")
     @Column(unique = true, length = 40, nullable = false)
     private String email;
     
-    @NotEmpty(message = "Não pode ser nulo ou vazio.")
+    @NotBlank(message = "Não pode ser nulo ou vazio.")
 	@Length(min = 9, max = 14, message = "Tamanho inválido.")
     @Column(length = 14, name = "cpf_cnpj", unique = true, nullable = false)
     private String cpfOuCnpj;
