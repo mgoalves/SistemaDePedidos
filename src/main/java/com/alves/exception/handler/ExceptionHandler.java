@@ -1,5 +1,6 @@
 package com.alves.exception.handler;
 
+import javax.management.InvalidAttributeValueException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.dao.DataIntegrityViolationException;
@@ -17,6 +18,7 @@ import com.alves.exception.ObjectNotFoundException;
 @ControllerAdvice
 public class ExceptionHandler extends ResponseEntityExceptionHandler {
 
+	//Trata dados que não foram encontrados -------------------------------------------
 	@org.springframework.web.bind.annotation.ExceptionHandler({ ObjectNotFoundException.class })
 	public ResponseEntity<StandardError> objectNotFound(ObjectNotFoundException e, HttpServletRequest request) {
 
@@ -55,4 +57,16 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler {
 
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
 	}
+	
+	// Trata exceções quando entidades vinculadas não foram encontradas
+		// --------------------------------
+		@org.springframework.web.bind.annotation.ExceptionHandler({ InvalidAttributeValueException.class })
+		public ResponseEntity<Object> InvalidAttributeValueException(InvalidAttributeValueException e,
+				WebRequest request) {
+
+			StandardError error = new StandardError(HttpStatus.BAD_REQUEST.value(), e.getMessage(),
+					System.currentTimeMillis());
+
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+		}
 }

@@ -3,6 +3,7 @@ package com.alves.resource;
 import java.net.URI;
 import java.util.List;
 
+import javax.management.InvalidAttributeValueException;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +46,7 @@ public class ClienteResource {
 	
 	//Salvar ---------------------------------------------------------------
 	@PostMapping
-	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteTelEndDTO ClienteTelEndDTO){
+	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteTelEndDTO ClienteTelEndDTO) throws InvalidAttributeValueException{
 		
 		Cliente cliente = clienteService.save(ClienteTelEndDTO);
 		

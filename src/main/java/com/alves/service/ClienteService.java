@@ -3,6 +3,8 @@ package com.alves.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.management.InvalidAttributeValueException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -45,9 +47,22 @@ public class ClienteService {
 	}
 	
 	// Salvar -----------------------------------------------------
-	public Cliente save(ClienteTelEndDTO clienteTelEndDTO) {
+	public Cliente save(ClienteTelEndDTO clienteTelEndDTO) throws InvalidAttributeValueException {
 		
 		Cidade cidade = cidadeRepository.findOne(clienteTelEndDTO.getCidadeId());
+		
+		
+		if(clienteTelEndDTO.getTipo().equals(TipoCliente.PESSOAFISICA.getId()) && 
+				!ValidaCPFeCNPJ.isValidCPF(clienteTelEndDTO.getCpfOuCnpj())) {
+			
+			throw new InvalidAttributeValueException("CPF Inválido");
+		}
+		if(clienteTelEndDTO.getTipo().equals(TipoCliente.PESSOAJURIDICA.getId()) && 
+				!ValidaCPFeCNPJ.isValidCNPJ(clienteTelEndDTO.getCpfOuCnpj())) {
+			
+			throw new InvalidAttributeValueException("CNPJ Inválido");
+		}
+		
 		
 		Cliente cliente = new Cliente(null, clienteTelEndDTO.getNome(), clienteTelEndDTO.getEmail(), 
 										clienteTelEndDTO.getCpfOuCnpj(), TipoCliente.toEnum(clienteTelEndDTO.getTipo()));
