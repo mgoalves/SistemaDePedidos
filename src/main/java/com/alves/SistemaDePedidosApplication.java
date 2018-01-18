@@ -134,8 +134,8 @@ public class SistemaDePedidosApplication implements CommandLineRunner {
 		pedidoRepository.save(Arrays.asList(ped1, ped2));
 		pagamentoRepository.save(Arrays.asList(pag1, pag2));
 		
-		ItemPedido it1 = new ItemPedido(p1, ped1, null, 1, 2000.00);
-		ItemPedido it2 = new ItemPedido(p3, ped1, null, 2, 80.00);
+		ItemPedido it1 = new ItemPedido(p1, ped1, 0.00, 1, 2000.00);
+		ItemPedido it2 = new ItemPedido(p3, ped1, 0.00, 2, 80.00);
 		ItemPedido it3 = new ItemPedido(p2, ped2, 100.00, 1, 800.00);
 		
 		itemPedidoRepository.save(Arrays.asList(it1, it2, it3));

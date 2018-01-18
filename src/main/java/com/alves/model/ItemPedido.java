@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -70,6 +71,10 @@ public class ItemPedido implements Serializable {
 	@JsonIgnore @Transient
 	public Pedido getPedido() {
 		return id.getPedido();
+	}
+	@Transient
+	public double getSubTotal() {
+		return (preco - desconto) * quantidade;
 	}
 	
 	//HashCode and Equals: ID --------------------------------------

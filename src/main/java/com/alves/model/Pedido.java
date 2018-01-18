@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -97,6 +98,19 @@ public class Pedido implements Serializable {
 		this.itens = itens;
 	}
 	
+	//Metodos Auxiliares ---------------------------------------------
+	@Transient
+	public double getValorTotal() {
+		
+		double total =  0.00;
+		
+		for (ItemPedido item : itens) {
+			total = total + item.getSubTotal();
+		}
+		
+		return total;
+	}
+	
 	
 	//HashCode and Equals: ID ---------------------------------------
 	@Override
@@ -122,4 +136,6 @@ public class Pedido implements Serializable {
 			return false;
 		return true;
 	}
+	
+	
 }
