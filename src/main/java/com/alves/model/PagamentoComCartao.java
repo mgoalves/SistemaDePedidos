@@ -3,29 +3,31 @@ package com.alves.model;
 import javax.persistence.Entity;
 
 import com.alves.model.enums.EstadoPagamento;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 @Entity
-public class PagamentoComCartao extends Pagamento{
+@JsonTypeName("pagamentoComCartao")
+public class PagamentoComCartao extends Pagamento {
 
 	private static final long serialVersionUID = 1L;
 
 	//Atributos -------------------------------------
-	private Integer numDeParcelas;
+	private Integer numeroDeParcelas;
 	
 	//Construtores -----------------------------------
 	public PagamentoComCartao() {
 	}
-	public PagamentoComCartao(Long id, EstadoPagamento estado, Pedido pedido, Integer numDeParcelas) {
+	public PagamentoComCartao(Long id, EstadoPagamento estado, Pedido pedido, Integer numeroDeParcelas) {
 		super(id, estado, pedido);
 		
-		this.numDeParcelas = numDeParcelas;
+		this.numeroDeParcelas = numeroDeParcelas;
 	}
 	
 	//Get and Set -------------------------------------
-	public Integer getNumDeParcelas() {
-		return numDeParcelas;
+	public Integer getnumeroDeParcelas() {
+		return numeroDeParcelas;
 	}
-	public void setNumDeParcelas(Integer numDeParcelas) {
-		this.numDeParcelas = numDeParcelas;
+	public void setnumeroDeParcelas(Integer numeroDeParcelas) {
+		this.numeroDeParcelas = numeroDeParcelas;
 	}
 }

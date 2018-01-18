@@ -27,12 +27,25 @@ public class Pedido implements Serializable {
 
 	
 	//Atributos ------------------------------------------------
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	
+	@JsonFormat(pattern = "dd/MM/yyyy hh:mm")
 	private Date instante;
 	
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
 	private Pagamento pagamento;
+	
+	@ManyToOne
+	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
+	
+	@ManyToOne
+	@JoinColumn(name = "endereco_de_entrega_id")
 	private Endereco endDeEntrega;
+	
+	@OneToMany(mappedBy = "id.pedido")
 	private Set<ItemPedido> itens = new HashSet<>();
 	
 	//Construtores ----------------------------------------------
@@ -47,50 +60,36 @@ public class Pedido implements Serializable {
 	}
 	
 	//Getters and Setters ----------------------------------------
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	@JsonFormat(pattern = "dd/MM/yyyy hh:mm")
 	public Date getInstante() {
 		return instante;
 	}
 	public void setInstante(Date instante) {
 		this.instante = instante;
 	}
-	
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
 	public Pagamento getPagamento() {
 		return pagamento;
 	}
 	public void setPagamento(Pagamento pagamento) {
 		this.pagamento = pagamento;
 	}
-
-	@ManyToOne
-	@JoinColumn(name = "cliente_id")
 	public Cliente getCliente() {
 		return cliente;
 	}
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-	
-	@ManyToOne
-	@JoinColumn(name = "endereco_id")
 	public Endereco getEndDeEntrega() {
 		return endDeEntrega;
 	}
 	public void setEndDeEntrega(Endereco endDeEntrega) {
 		this.endDeEntrega = endDeEntrega;
 	}
-	
-	@OneToMany(mappedBy = "id.pedido")
 	public Set<ItemPedido> getItens() {
 		return itens;
 	}
@@ -107,7 +106,6 @@ public class Pedido implements Serializable {
 		for (ItemPedido item : itens) {
 			total = total + item.getSubTotal();
 		}
-		
 		return total;
 	}
 	
