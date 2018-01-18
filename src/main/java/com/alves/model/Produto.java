@@ -59,7 +59,7 @@ public class Produto implements Serializable {
 	}
 	
 	@NotEmpty(message = "Preenchimento obrigatório.")
-	@Length(min = 5, max = 40, message = "Tamanho inválido.")
+	@Length(min = 4, max = 40, message = "Tamanho inválido.")
     @Column(length = 40, nullable = false)
 	public String getNome() {
 		return nome;

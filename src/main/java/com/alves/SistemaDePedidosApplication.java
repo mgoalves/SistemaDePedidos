@@ -72,6 +72,14 @@ public class SistemaDePedidosApplication implements CommandLineRunner {
 		Produto p1 = new Produto(null, "Computador", 2000.00);
 		Produto p2 = new Produto(null, "Impressora", 800.00);
 		Produto p3 = new Produto(null, "Mouse", 40.00);
+		Produto p4 = new Produto(null, "Mesa de escritório", 300.00);
+		Produto p5 = new Produto(null, "Toalha", 50.00);
+		Produto p6 = new Produto(null, "Colcha", 200.00);
+		Produto p7 = new Produto(null, "Televisão", 1200.00);
+		Produto p8 = new Produto(null, "Mangueira", 800.00);
+		Produto p9 = new Produto(null, "Abajour", 100.00);
+		Produto p10 = new Produto(null, "Pendente", 180.00);
+		Produto p11 = new Produto(null, "Shampoo", 90.00);
 		
 		cat1.getProdutos().addAll(Arrays.asList(p1, p2, p3));
 		cat2.getProdutos().addAll(Arrays.asList(p2));
@@ -79,6 +87,14 @@ public class SistemaDePedidosApplication implements CommandLineRunner {
 		p1.getCategorias().add(cat1);
 		p2.getCategorias().addAll(Arrays.asList(cat1, cat2));
 		p3.getCategorias().add(cat1);
+		p4.getCategorias().add(cat2);
+		p5.getCategorias().add(cat3);
+		p6.getCategorias().add(cat3);
+		p7.getCategorias().add(cat4);
+		p8.getCategorias().add(cat5);
+		p9.getCategorias().add(cat6);
+		p10.getCategorias().add(cat6);
+		p11.getCategorias().add(cat7);
 		
 		Estado est1 = new Estado(null, "Minas Gerais");
 		Estado est2 = new Estado(null, "São Paulo");
@@ -94,9 +110,9 @@ public class SistemaDePedidosApplication implements CommandLineRunner {
 		Cliente cli4 = new Cliente(null, "Pedro", "pedro@gmail.com", "12345678903", TipoCliente.PESSOAFISICA);
 		Cliente cli5 = new Cliente(null, "Gabriel", "gabriel@gmail.com", "12345678904", TipoCliente.PESSOAFISICA);
 		
-		Endereco end1 = new Endereco(null, "Rua 21", "342", null, "Vila Jaragua", "74655090", cli1, cid1); 
-		Endereco end2 = new Endereco(null, "Rua Matos", "105", "Apto 400", "Centro", "30270290", cli1, cid3);
-		Endereco end3 = new Endereco(null, "Rua Matos", "105", "Apto 400", "Centro", "30270290", cli2, cid3);
+		Endereco end1 = new Endereco(null, "Rua 40", "20", null, "Vila Romana", "12345126", cli1, cid1); 
+		Endereco end2 = new Endereco(null, "Rua Matos", "105", "Apto 400", "Centro", "12345556", cli1, cid3);
+		Endereco end3 = new Endereco(null, "Rua Matos", "105", "Apto 400", "Centro", "12345556", cli2, cid3);
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 		Pedido ped1 = new Pedido(null, sdf.parse("01/01/2018 00:00"), cli1, end1);
@@ -110,7 +126,7 @@ public class SistemaDePedidosApplication implements CommandLineRunner {
 		cli1.getPedidos().addAll(Arrays.asList(ped1, ped2));
 		
 		categoriaRepository.save(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7));
-		produtoRepository.save(Arrays.asList(p1, p2, p3));
+		produtoRepository.save(Arrays.asList(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11));
 		estadoRepository.save(Arrays.asList(est1, est2));
 		cidadeRepository.save(Arrays.asList(cid1, cid2, cid3));
 		clienteRepository.save(Arrays.asList(cli1, cli2, cli3, cli4, cli5));
