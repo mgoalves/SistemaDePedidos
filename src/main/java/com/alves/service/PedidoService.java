@@ -57,14 +57,8 @@ public class PedidoService {
 			boletoService.preencherBoleto(pagto, pedido.getInstante());
 		}
 
-		
-		System.out.println("\n\n\n\n\n\n\n\n\n" + pedido.getEndDeEntrega());
-		
 		pedido = pedidoRepository.save(pedido);
 		pagamentoRepository.save(pedido.getPagamento());
-		
-		System.out.println("\n\n\n\n\n\n\n\n\n" + pedido.getEndDeEntrega());
-
 		
 		for (ItemPedido item : pedido.getItens()) {
 			

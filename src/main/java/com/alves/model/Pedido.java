@@ -25,7 +25,6 @@ public class Pedido implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	
 	//Atributos ------------------------------------------------
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -108,7 +107,6 @@ public class Pedido implements Serializable {
 		}
 		return total;
 	}
-	
 	
 	//HashCode and Equals: ID ---------------------------------------
 	@Override

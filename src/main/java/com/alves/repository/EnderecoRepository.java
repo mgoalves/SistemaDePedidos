@@ -10,6 +10,6 @@ import com.alves.model.Endereco;
  * @author alves
  */
 @Repository
-public interface EnderecoRepository extends JpaRepository<Endereco, Long>{
+public interface EnderecoRepository extends JpaRepository<Endereco, Integer>{
 	
 }

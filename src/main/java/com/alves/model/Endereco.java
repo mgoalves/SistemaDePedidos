@@ -21,7 +21,7 @@ public class Endereco implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	//Atributos ----------------------------------
-	private Long id;
+	private Integer id;
 	private String logradouro;
 	private String numero;
 	private String complemento;
@@ -33,7 +33,7 @@ public class Endereco implements Serializable {
 	
 
 	//Constructors --------------------------------
-	public Endereco(Long id, String logradouro, String numero, String complemento, String bairro, String cep, Cliente cliente, Cidade cidade) {
+	public Endereco(Integer id, String logradouro, String numero, String complemento, String bairro, String cep, Cliente cliente, Cidade cidade) {
 		super();
 		this.id = id;
 		this.logradouro = logradouro;
@@ -51,10 +51,10 @@ public class Endereco implements Serializable {
 	//Getters and Setters ---------------------------
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	
