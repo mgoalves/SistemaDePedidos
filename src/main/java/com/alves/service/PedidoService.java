@@ -29,6 +29,8 @@ public class PedidoService {
 	private ItemPedidoRepository itemPedidoRepository;
 	@Autowired 
 	private BoletoService boletoService;
+	@Autowired
+	private ClienteService clienteService;
 
 	// Buscar por ID -----------------------------------------------
 	public Pedido findById(Long id) {
@@ -63,11 +65,16 @@ public class PedidoService {
 		for (ItemPedido item : pedido.getItens()) {
 			
 			item.setDesconto(0.00);
-			item.setPreco(produtoRepository.findOne(item.getProduto().getId()).getPreco());
+			item.setProduto(produtoRepository.findOne(item.getProduto().getId()));
+			item.setPreco(item.getProduto().getPreco());
 			item.setPedido(pedido);
 		}
 		
+		
+		pedido.setCliente(clienteService.findById(pedido.getCliente().getId()));
 		itemPedidoRepository.save(pedido.getItens());
+		
+		System.out.println(pedido);
 
 		return pedido;
 	}
