@@ -31,6 +31,8 @@ public class PedidoService {
 	private BoletoService boletoService;
 	@Autowired
 	private ClienteService clienteService;
+	@Autowired
+	private EmailService emailService;
 
 	// Buscar por ID -----------------------------------------------
 	public Pedido findById(Long id) {
@@ -74,7 +76,7 @@ public class PedidoService {
 		pedido.setCliente(clienteService.findById(pedido.getCliente().getId()));
 		itemPedidoRepository.save(pedido.getItens());
 		
-		System.out.println(pedido);
+		emailService.send(pedido);
 
 		return pedido;
 	}

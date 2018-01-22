@@ -109,12 +109,12 @@ public class DevelopmentConfig {
 		Cidade cid2 = new Cidade(null, "Belo Horizonte", est1);
 		Cidade cid3 = new Cidade(null, "Santos", est2);
 
-		Cliente cli1 = new Cliente(null, "Maria", "maria@gmail.com", "1112223334445", TipoCliente.PESSOAFISICA);
+		Cliente cli1 = new Cliente(null, "Maria", "marcello_doalves@hotmail.com", "1112223334445", TipoCliente.PESSOAFISICA);
 		cli1.getTelefones().addAll(Arrays.asList("99998888", "98989898"));
-		Cliente cli2 = new Cliente(null, "João", "joao@gmail.com", "12345678901", TipoCliente.PESSOAFISICA);
-		Cliente cli3 = new Cliente(null, "José", "jose@gmail.com", "12345678902", TipoCliente.PESSOAFISICA);
-		Cliente cli4 = new Cliente(null, "Pedro", "pedro@gmail.com", "12345678903", TipoCliente.PESSOAFISICA);
-		Cliente cli5 = new Cliente(null, "Gabriel", "gabriel@gmail.com", "12345678904", TipoCliente.PESSOAFISICA);
+		Cliente cli2 = new Cliente(null, "João", "joao@hotmail.com", "12345678901", TipoCliente.PESSOAFISICA);
+		Cliente cli3 = new Cliente(null, "José", "jose@hotmail.com", "12345678902", TipoCliente.PESSOAFISICA);
+		Cliente cli4 = new Cliente(null, "Pedro", "pedro@hotmail.com", "12345678903", TipoCliente.PESSOAFISICA);
+		Cliente cli5 = new Cliente(null, "Gabriel", "gabriel@hotmail.com", "12345678904", TipoCliente.PESSOAFISICA);
 
 		Endereco end1 = new Endereco(null, "Rua 40", "20", null, "Vila Romana", "12345126", cli1, cid1);
 		Endereco end2 = new Endereco(null, "Rua Matos", "105", "Apto 400", "Centro", "12345556", cli1, cid3);
