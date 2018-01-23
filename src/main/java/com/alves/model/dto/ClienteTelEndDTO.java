@@ -30,6 +30,8 @@ public class ClienteTelEndDTO implements Serializable {
 	
 	private Long cidadeId;
 	
+	private String senha;
+	
 	//Construtor ----------------------------------------------------
 	public ClienteTelEndDTO() {
 	}
@@ -53,7 +55,6 @@ public class ClienteTelEndDTO implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 	
 	@NotBlank(message = "Não pode ser nulo ou vazio.")
 	@Length(min = 9, max = 14, message = "Tamanho inválido.")
@@ -137,5 +138,14 @@ public class ClienteTelEndDTO implements Serializable {
 	}
 	public void setCidadeId(Long cidadeId) {
 		this.cidadeId = cidadeId;
+	}
+	
+	@NotBlank(message = "Não pode ser nulo ou vazio.")
+	@Length(min = 8, max = 14, message = "Tamanho inválido.")
+    public String getSenha() {
+		return senha;
+	}
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 }

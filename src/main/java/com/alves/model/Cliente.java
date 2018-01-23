@@ -50,9 +50,16 @@ public class Cliente implements Serializable {
 	@Length(min = 9, max = 14, message = "Tamanho inválido.")
     @Column(length = 14, name = "cpf_cnpj", unique = true, nullable = false)
     private String cpfOuCnpj;
+    
     private Integer tipo;
     
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    @JsonIgnore
+    @NotBlank(message = "Não pode ser nulo ou vazio.")
+	@Length(min = 8, max = 60, message = "Tamanho inválido.")
+    @Column(length = 60, nullable = false)
+    private String senha;
+    
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Endereco> enderecos = new ArrayList<>();
     
     @ElementCollection
@@ -65,13 +72,14 @@ public class Cliente implements Serializable {
     
  
     //Constructors -------------------------------
-    public Cliente(Long id, String nome, String email, String cpfOuCnpj, TipoCliente tipo) {
+    public Cliente(Long id, String nome, String email, String cpfOuCnpj, TipoCliente tipo, String senha) {
         super();
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.cpfOuCnpj = cpfOuCnpj;
         this.tipo = (tipo == null) ? null : tipo.getId();
+        this.senha = senha;
     }
     public Cliente() {
     }
@@ -111,6 +119,13 @@ public class Cliente implements Serializable {
     public void setTipo(TipoCliente tipo) {
         this.tipo = tipo.getId();
     }
+    
+    public String getSenha() {
+		return senha;
+	}
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
     
     public List<Endereco> getEnderecos() {
         return enderecos;

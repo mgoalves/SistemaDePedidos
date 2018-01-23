@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.alves.model.Categoria;
 import com.alves.model.Cidade;
@@ -55,6 +56,8 @@ public class DevelopmentConfig {
 	private PagamentoRepository pagamentoRepository;
 	@Autowired
 	private ItemPedidoRepository itemPedidoRepository;
+	@Autowired 
+	private BCryptPasswordEncoder passwordEncoder;
 
 	@Value("${spring.jpa.hibernate.ddl-auto}")
 	private String strategy;
@@ -109,12 +112,12 @@ public class DevelopmentConfig {
 		Cidade cid2 = new Cidade(null, "Belo Horizonte", est1);
 		Cidade cid3 = new Cidade(null, "Santos", est2);
 
-		Cliente cli1 = new Cliente(null, "Maria", "marcello_doalves@hotmail.com", "1112223334445", TipoCliente.PESSOAFISICA);
+		Cliente cli1 = new Cliente(null, "Maria", "marcello_doalves@hotmail.com", "1112223334445", TipoCliente.PESSOAFISICA, passwordEncoder.encode("123"));
 		cli1.getTelefones().addAll(Arrays.asList("99998888", "98989898"));
-		Cliente cli2 = new Cliente(null, "João", "joao@hotmail.com", "12345678901", TipoCliente.PESSOAFISICA);
-		Cliente cli3 = new Cliente(null, "José", "jose@hotmail.com", "12345678902", TipoCliente.PESSOAFISICA);
-		Cliente cli4 = new Cliente(null, "Pedro", "pedro@hotmail.com", "12345678903", TipoCliente.PESSOAFISICA);
-		Cliente cli5 = new Cliente(null, "Gabriel", "gabriel@hotmail.com", "12345678904", TipoCliente.PESSOAFISICA);
+		Cliente cli2 = new Cliente(null, "João", "joao@hotmail.com", "12345678901", TipoCliente.PESSOAFISICA, passwordEncoder.encode("123"));
+		Cliente cli3 = new Cliente(null, "José", "jose@hotmail.com", "12345678902", TipoCliente.PESSOAFISICA, passwordEncoder.encode("123"));
+		Cliente cli4 = new Cliente(null, "Pedro", "pedro@hotmail.com", "12345678903", TipoCliente.PESSOAFISICA, passwordEncoder.encode("123"));
+		Cliente cli5 = new Cliente(null, "Gabriel", "gabriel@hotmail.com", "12345678904", TipoCliente.PESSOAFISICA, passwordEncoder.encode("123"));
 
 		Endereco end1 = new Endereco(null, "Rua 40", "20", null, "Vila Romana", "12345126", cli1, cid1);
 		Endereco end2 = new Endereco(null, "Rua Matos", "105", "Apto 400", "Centro", "12345556", cli1, cid3);

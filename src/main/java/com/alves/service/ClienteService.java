@@ -10,6 +10,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.alves.exception.ObjectNotFoundException;
@@ -33,6 +34,8 @@ public class ClienteService {
 	private EnderecoRepository enderecoRepository;
 	@Autowired
 	private CidadeRepository cidadeRepository;
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 
 	// Buscar por ID --------------------------------------------
 	public Cliente findById(Long id) {
@@ -52,7 +55,8 @@ public class ClienteService {
 		Cidade cidade = cidadeRepository.findOne(clienteTelEndDTO.getCidadeId());
 		
 		Cliente cliente = new Cliente(null, clienteTelEndDTO.getNome(), clienteTelEndDTO.getEmail(), 
-										clienteTelEndDTO.getCpfOuCnpj(), TipoCliente.toEnum(clienteTelEndDTO.getTipo()));
+										clienteTelEndDTO.getCpfOuCnpj(), TipoCliente.toEnum(clienteTelEndDTO.getTipo()), 
+										passwordEncoder.encode(clienteTelEndDTO.getSenha()));
 
 		Endereco endereco =  new Endereco(null, clienteTelEndDTO.getLogradouro(), clienteTelEndDTO.getNumero(), 
 							clienteTelEndDTO.getComplemento(), clienteTelEndDTO.getBairro(), clienteTelEndDTO.getCep(), cliente, cidade);
@@ -117,7 +121,7 @@ public class ClienteService {
 	@SuppressWarnings("unused")
 	private Cliente fromDTO(ClienteDTO clienteDTO) {
 		
-		return new Cliente(clienteDTO.getId(), clienteDTO.getNome(), clienteDTO.getEmail(), null, null);
+		return new Cliente(clienteDTO.getId(), clienteDTO.getNome(), clienteDTO.getEmail(), null, null, null);
 	}
 
 
