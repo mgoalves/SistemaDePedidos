@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
@@ -21,6 +22,7 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.alves.model.enums.Perfil;
 import com.alves.model.enums.TipoCliente;
 import com.fasterxml.jackson.annotation.JsonIgnore;
  
@@ -66,6 +68,10 @@ public class Cliente implements Serializable {
     @CollectionTable(name = "telefone")
     private Set<String> telefones = new HashSet<>();
     
+    @ElementCollection
+    @CollectionTable(name = "perfis")
+    private Set<Integer> perfis = new HashSet<>();
+    
     @JsonIgnore
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos =  new ArrayList<>();
@@ -80,8 +86,10 @@ public class Cliente implements Serializable {
         this.cpfOuCnpj = cpfOuCnpj;
         this.tipo = (tipo == null) ? null : tipo.getId();
         this.senha = senha;
+        addPerfil(Perfil.CLIENTE);
     }
     public Cliente() {
+    	addPerfil(Perfil.CLIENTE);
     }
     
     //Getters and Setters --------------------------
@@ -139,6 +147,13 @@ public class Cliente implements Serializable {
     }
     public void setTelefones(Set<String> telefones) {
         this.telefones = telefones;
+    }
+    
+    public Set<Perfil> getPerfis(){
+    	return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
+    }
+    public void addPerfil(Perfil perfil){
+    	perfis.add(perfil.getId());
     }
     
     public List<Pedido> getPedidos() {

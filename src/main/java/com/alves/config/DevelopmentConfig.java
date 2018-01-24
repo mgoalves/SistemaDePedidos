@@ -23,6 +23,7 @@ import com.alves.model.PagamentoComCartao;
 import com.alves.model.Pedido;
 import com.alves.model.Produto;
 import com.alves.model.enums.EstadoPagamento;
+import com.alves.model.enums.Perfil;
 import com.alves.model.enums.TipoCliente;
 import com.alves.repository.CategoriaRepository;
 import com.alves.repository.CidadeRepository;
@@ -115,6 +116,7 @@ public class DevelopmentConfig {
 		Cliente cli1 = new Cliente(null, "Maria", "marcello_doalves@hotmail.com", "1112223334445", TipoCliente.PESSOAFISICA, passwordEncoder.encode("123"));
 		cli1.getTelefones().addAll(Arrays.asList("99998888", "98989898"));
 		Cliente cli2 = new Cliente(null, "João", "joao@hotmail.com", "12345678901", TipoCliente.PESSOAFISICA, passwordEncoder.encode("123"));
+		cli2.addPerfil(Perfil.ADMIN);
 		Cliente cli3 = new Cliente(null, "José", "jose@hotmail.com", "12345678902", TipoCliente.PESSOAFISICA, passwordEncoder.encode("123"));
 		Cliente cli4 = new Cliente(null, "Pedro", "pedro@hotmail.com", "12345678903", TipoCliente.PESSOAFISICA, passwordEncoder.encode("123"));
 		Cliente cli5 = new Cliente(null, "Gabriel", "gabriel@hotmail.com", "12345678904", TipoCliente.PESSOAFISICA, passwordEncoder.encode("123"));
