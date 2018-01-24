@@ -38,7 +38,7 @@ public class ClienteResource {
 	//Buscar um - GET -----------------------------------------
 	@GetMapping
 	@RequestMapping("/{id}")
-	public ResponseEntity<Cliente> findOne(@PathVariable Long id) {
+	public ResponseEntity<Cliente> findOne(@PathVariable Integer id) {
 		
 		Cliente cliente = clienteService.findById(id);
 		return ResponseEntity.ok(cliente);
@@ -58,7 +58,7 @@ public class ClienteResource {
 	
 	//Atualizar - PUT ------------------------------------------
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> update(@PathVariable Long id, 
+	public ResponseEntity<Void> update(@PathVariable Integer id, 
 									   @Valid @RequestBody ClienteDTO clienteDTO) {
 		
 		clienteService.update(id, clienteDTO);
@@ -68,7 +68,7 @@ public class ClienteResource {
 	
 	//Deletar - DELETE ------------------------------------------
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE) 
-	public ResponseEntity<Cliente> delete(@PathVariable Long id) {
+	public ResponseEntity<Cliente> delete(@PathVariable Integer id) {
 		
 		clienteService.delete(id);
 		return ResponseEntity.noContent().build();

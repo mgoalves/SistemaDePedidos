@@ -11,7 +11,7 @@ import com.alves.model.Cliente;
  * @author alves
  */
 @Repository
-public interface ClienteRepository extends JpaRepository<Cliente, Long>{
+public interface ClienteRepository extends JpaRepository<Cliente, Integer>{
 
 	
 	@Transactional(readOnly = true)

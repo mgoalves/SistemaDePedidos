@@ -38,7 +38,7 @@ public class ClienteService {
 	private BCryptPasswordEncoder passwordEncoder;
 
 	// Buscar por ID --------------------------------------------
-	public Cliente findById(Long id) {
+	public Cliente findById(Integer id) {
 
 		Cliente cliente = clienteRepository.findOne(id);
 
@@ -76,7 +76,7 @@ public class ClienteService {
 
 
 	// Atualiza um cliente ---------------------------------------
-	public Cliente update(Long id, ClienteDTO clienteDTO) {
+	public Cliente update(Integer id, ClienteDTO clienteDTO) {
 
 		Cliente cliente = findById(id);
 		updateData(cliente, clienteDTO);
@@ -87,7 +87,7 @@ public class ClienteService {
 
 	
 	// Deleta um cliente ------------------------------------------
-	public void delete(Long id) {
+	public void delete(Integer id) {
 
 		findById(id);
 		try {

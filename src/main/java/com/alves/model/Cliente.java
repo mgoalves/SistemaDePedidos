@@ -36,7 +36,7 @@ public class Cliente implements Serializable {
     //Atributos ----------------------------------
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Integer id;
  
     @NotBlank(message = "Não pode ser nulo ou vazio.")
 	@Length(min = 2, max = 40, message = "Tamanho inválido.")
@@ -78,7 +78,7 @@ public class Cliente implements Serializable {
     
  
     //Constructors -------------------------------
-    public Cliente(Long id, String nome, String email, String cpfOuCnpj, TipoCliente tipo, String senha) {
+    public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipo, String senha) {
         super();
         this.id = id;
         this.nome = nome;
@@ -93,10 +93,10 @@ public class Cliente implements Serializable {
     }
     
     //Getters and Setters --------------------------
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     
