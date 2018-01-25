@@ -68,4 +68,8 @@ public class UserSistem implements UserDetails {
 	public boolean isEnabled() {
 		return true;
 	}
+	
+	public boolean hasRole(Perfil admin) {
+		return authorities.contains(new SimpleGrantedAuthority(admin.getDescrição()));
+	}
 }

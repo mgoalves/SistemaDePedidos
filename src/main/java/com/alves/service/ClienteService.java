@@ -10,6 +10,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.access.AuthorizationServiceException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -19,10 +20,12 @@ import com.alves.model.Cliente;
 import com.alves.model.Endereco;
 import com.alves.model.dto.ClienteDTO;
 import com.alves.model.dto.ClienteTelEndDTO;
+import com.alves.model.enums.Perfil;
 import com.alves.model.enums.TipoCliente;
 import com.alves.repository.CidadeRepository;
 import com.alves.repository.ClienteRepository;
 import com.alves.repository.EnderecoRepository;
+import com.alves.security.UserSistem;
 
 @Service
 public class ClienteService {
@@ -40,6 +43,12 @@ public class ClienteService {
 	// Buscar por ID --------------------------------------------
 	public Cliente findById(Integer id) {
 
+		UserSistem user = UserService.getAuthenticated();
+		if(user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+			
+			throw new AuthorizationServiceException("Acesso negado");
+		}
+		
 		Cliente cliente = clienteRepository.findOne(id);
 
 		if (cliente == null) {
