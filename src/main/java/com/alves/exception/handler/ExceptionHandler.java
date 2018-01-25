@@ -49,7 +49,7 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler {
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException e,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
 
-		ValidationError error = new ValidationError(HttpStatus.BAD_REQUEST.value(), "Argumento inválidos.",
+		ValidationError error = new ValidationError(HttpStatus.BAD_REQUEST.value(), "Argumento(s) inválido(s).",
 				System.currentTimeMillis());
 
 		for (FieldError erro : e.getBindingResult().getFieldErrors()) {

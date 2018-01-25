@@ -8,6 +8,7 @@ import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 
+import com.alves.model.Cliente;
 import com.alves.model.Pedido;
 
 @Service
@@ -35,6 +36,20 @@ public class EmailService {
 	public void send(Pedido pedido) {
 		
 		mailSender.send(prepareSimpleMailMessage(pedido));
+	}
+
+	public void sendNewPassword(Cliente cliente, String newPassword) {
+		
+		SimpleMailMessage mail = new SimpleMailMessage();
+		
+		mail.setTo(cliente.getEmail());
+		mail.setFrom(sender);
+		mail.setSubject("Sua nova senha");
+		mail.setSentDate(new Date(System.currentTimeMillis()));
+		mail.setText("Sua nova senha é: " + newPassword);
+		
+		mailSender.send(mail);
+		
 	}
 
 }
