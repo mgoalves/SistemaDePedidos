@@ -3,9 +3,14 @@ package com.alves.service;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.access.AuthorizationServiceException;
 import org.springframework.stereotype.Service;
 
 import com.alves.exception.ObjectNotFoundException;
+import com.alves.model.Cliente;
 import com.alves.model.ItemPedido;
 import com.alves.model.PagamentoComBoleto;
 import com.alves.model.Pedido;
@@ -14,6 +19,7 @@ import com.alves.repository.ItemPedidoRepository;
 import com.alves.repository.PagamentoRepository;
 import com.alves.repository.PedidoRepository;
 import com.alves.repository.ProdutoRepository;
+import com.alves.security.UserSistem;
 
 @Service
 public class PedidoService {
@@ -79,5 +85,24 @@ public class PedidoService {
 		emailService.send(pedido);
 
 		return pedido;
+	}
+	
+	//Listar Pedidos com paginação
+	public Page<Pedido> pageAll(Integer page, Integer size, String direction, String orderBy){
+		
+		UserSistem user = UserService.getAuthenticated();
+		
+		if(user == null) {
+			
+			throw new AuthorizationServiceException("Acesso negado");
+		}
+	
+		PageRequest pageRequest = new PageRequest(page, size, Direction.valueOf(direction), orderBy);
+		
+		Cliente cliente = clienteService.findById(user.getId());
+	
+		Page<Pedido> list = pedidoRepository.findByCliente(cliente, pageRequest);
+		
+		return list; 
 	}
 }
