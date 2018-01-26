@@ -133,7 +133,20 @@ public class ClienteService {
 	
 	//Salva foto de perfil do usuário -----------------------------------
 	public URI uploadProfile(MultipartFile file) {
-		return s3Service.uploadFile(file);
+		
+		UserSistem user = UserService.getAuthenticated();
+		if(user == null) {
+			
+			throw new AuthorizationServiceException("Acesso negado");
+		}
+		
+		URI uri = s3Service.uploadFile(file);
+		
+		Cliente cliente = clienteRepository.findOne(user.getId());
+		cliente.setUriProfile(uri.toString());
+		clienteRepository.save(cliente);
+		
+		return uri;
 	}
 	
 	@SuppressWarnings("unused")

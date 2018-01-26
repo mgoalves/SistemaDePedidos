@@ -77,8 +77,10 @@ public class Cliente implements Serializable {
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos =  new ArrayList<>();
     
- 
-    //Constructors -------------------------------
+    @Column(unique = true)
+    private String uriProfile;
+    
+	//Constructors -------------------------------
     public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipo, String senha) {
         super();
         this.id = id;
@@ -163,6 +165,12 @@ public class Cliente implements Serializable {
     public void setPedidos(List<Pedido> pedidos) {
         this.pedidos = pedidos;
     }
+    public String getUriProfile() {
+		return uriProfile;
+	}
+	public void setUriProfile(String uriProfile) {
+		this.uriProfile = uriProfile;
+	}
     
     //HashCode and Equals: ID, Email, CPF-CNPJ -----------------------------------
     @Override
