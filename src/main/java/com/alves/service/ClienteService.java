@@ -1,5 +1,7 @@
 package com.alves.service;
 
+import java.awt.image.BufferedImage;
+import java.io.InputStream;
 import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -43,6 +45,8 @@ public class ClienteService {
 	private BCryptPasswordEncoder passwordEncoder;
 	@Autowired
 	private S3Service s3Service;
+	@Autowired
+	private ImageService imageService;
 
 	// Buscar por ID --------------------------------------------
 	public Cliente findById(Integer id) {
@@ -140,13 +144,13 @@ public class ClienteService {
 			throw new AuthorizationServiceException("Acesso negado");
 		}
 		
-		URI uri = s3Service.uploadFile(file);
+		BufferedImage image = imageService.getJpgImageFromFile(file);
 		
-		Cliente cliente = clienteRepository.findOne(user.getId());
-		cliente.setUriProfile(uri.toString());
-		clienteRepository.save(cliente);
+		String name = user.getId() + ".jpg";
 		
-		return uri;
+		InputStream ins = imageService.getInputStream(image, "jpg");
+		
+		return s3Service.uploadFile(name, ins, "image");
 	}
 	
 	@SuppressWarnings("unused")

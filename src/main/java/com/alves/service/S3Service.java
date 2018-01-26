@@ -41,7 +41,7 @@ public class S3Service {
 
 	}
 
-	private URI uploadFile(String fileName, InputStream ins, String contentType) {
+	public URI uploadFile(String fileName, InputStream ins, String contentType) {
 		
 		
 		try {
