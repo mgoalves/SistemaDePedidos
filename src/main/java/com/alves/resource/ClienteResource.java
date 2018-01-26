@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.alves.model.Cliente;
@@ -98,5 +99,15 @@ public class ClienteResource {
 			@RequestParam(value="direction", defaultValue="ASC") String direction) {
 		
 		return ResponseEntity.ok(clienteService.pageAll(page, size, direction, orderBy));
+	}
+	
+	// Enviar foto de perfil ---------------------------------------------------------------
+	@PostMapping
+	@RequestMapping("/picture")
+	public ResponseEntity<Void> uploadProfile(@RequestParam(name="file") MultipartFile file) {
+		
+		URI uri = clienteService.uploadProfile(file);
+		
+		return ResponseEntity.created(uri).build();
 	}
 }

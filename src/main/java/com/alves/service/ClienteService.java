@@ -1,5 +1,6 @@
 package com.alves.service;
 
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,6 +14,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.security.access.AuthorizationServiceException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.alves.exception.ObjectNotFoundException;
 import com.alves.model.Cidade;
@@ -39,6 +41,8 @@ public class ClienteService {
 	private CidadeRepository cidadeRepository;
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
+	@Autowired
+	private S3Service s3Service;
 
 	// Buscar por ID --------------------------------------------
 	public Cliente findById(Integer id) {
@@ -125,6 +129,11 @@ public class ClienteService {
 
 		return listDto;
 
+	}
+	
+	//Salva foto de perfil do usuário -----------------------------------
+	public URI uploadProfile(MultipartFile file) {
+		return s3Service.uploadFile(file);
 	}
 	
 	@SuppressWarnings("unused")
