@@ -145,6 +145,8 @@ public class ClienteService {
 		}
 		
 		BufferedImage image = imageService.getJpgImageFromFile(file);
+		image = imageService.cropSquare(image);
+		image = imageService.resize(image);
 		
 		String name = user.getId() + ".jpg";
 		

@@ -85,7 +85,15 @@
 			<version>LATEST</version>
 		</dependency>
 		<!-- AMAZON - END -->
-		
+
+		<!-- IMAGE RESIZER - BEGIN -->
+		<dependency>
+			<groupId>org.imgscalr</groupId>
+			<artifactId>imgscalr-lib</artifactId>
+			<version>4.2</version>
+		</dependency>
+		<!-- IMAGE RESIZER - END -->
+
 	</dependencies>
 
 	<properties>
