@@ -14,7 +14,11 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import com.alves.exception.FileException;
 import com.alves.exception.ObjectNotFoundException;
+import com.amazonaws.AmazonClientException;
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.services.s3.model.AmazonS3Exception;
 
 @ControllerAdvice
 public class ExceptionHandler extends ResponseEntityExceptionHandler {
@@ -80,5 +84,51 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler {
 				System.currentTimeMillis());
 
 		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(error);
+	}
+
+	// Trata exceções quando existir erros na conversão de arquivo
+	// --------------------------------
+	@org.springframework.web.bind.annotation.ExceptionHandler({ FileException.class })
+	public ResponseEntity<Object> fileException(FileException e, WebRequest request) {
+
+		StandardError error = new StandardError(HttpStatus.BAD_REQUEST.value(), e.getMessage(),
+				System.currentTimeMillis());
+
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+	}
+
+	// Trata exceções AMAZON - 1.
+	// --------------------------------
+	@org.springframework.web.bind.annotation.ExceptionHandler({ AmazonServiceException.class })
+	public ResponseEntity<Object> amazonServiceException(AmazonServiceException e, WebRequest request) {
+
+		HttpStatus statusCode = HttpStatus.valueOf(e.getErrorCode());
+		
+		StandardError error = new StandardError(statusCode.value(), e.getMessage(),
+				System.currentTimeMillis());
+
+		return ResponseEntity.status(statusCode).body(error);
+	}
+
+	// Trata exceções AMAZON - 2.
+	// --------------------------------
+	@org.springframework.web.bind.annotation.ExceptionHandler({ AmazonClientException.class })
+	public ResponseEntity<Object> amazonClientException(AmazonClientException e, WebRequest request) {
+
+		StandardError error = new StandardError(HttpStatus.BAD_REQUEST.value(), e.getMessage(),
+				System.currentTimeMillis());
+
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+	}
+
+	// Trata exceções AMAZON - 3.
+	// --------------------------------
+	@org.springframework.web.bind.annotation.ExceptionHandler({ AmazonS3Exception.class })
+	public ResponseEntity<Object> amazonS3Exception(AmazonS3Exception e, WebRequest request) {
+
+		StandardError error = new StandardError(HttpStatus.BAD_REQUEST.value(), e.getMessage(),
+				System.currentTimeMillis());
+
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
 	}
 }
