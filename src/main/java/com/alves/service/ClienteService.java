@@ -155,12 +155,26 @@ public class ClienteService {
 		return s3Service.uploadFile(name, ins, "image");
 	}
 	
-	@SuppressWarnings("unused")
-	private Cliente fromDTO(ClienteDTO clienteDTO) {
-		
-		return new Cliente(clienteDTO.getId(), clienteDTO.getNome(), clienteDTO.getEmail(), null, null, null);
-	}
+	// Buscar por Email --------------------------------------------
+	public Cliente findByEmail(String email) {
 
+		UserSistem user = UserService.getAuthenticated();
+		
+		if(user == null || !user.hasRole(Perfil.ADMIN) && !email.equals(user.getUsername())) {
+			
+			throw new AuthorizationServiceException("Acesso negado");
+		}
+		
+		Cliente cliente = clienteRepository.findByEmail(email);
+
+		if (cliente == null) {
+			
+			throw new ObjectNotFoundException(
+					"Objeto não encontrado. E-mail: " + email + ", Tipo: " + Cliente.class.getName());
+		}
+		
+		return cliente;
+	}
 
 	private void updateData(Cliente cliente, ClienteDTO clienteDTO) {
 		
