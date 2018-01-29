@@ -29,7 +29,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	// Array que permite o usuário resgatar dados mesmo não estando logado. GET.
 	private static final String[] PUBLIC_MATCHERS_GET = { 
 			"/produtos/**", 
-			"/categorias/**"
+			"/categorias/**",
+			"/estados/**",
+			"/estados/id/cidades/**"
 	};
 	private static final String[] PUBLIC_MATCHERS_POST = { 
 			"/clientes",

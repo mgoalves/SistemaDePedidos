@@ -14,6 +14,8 @@ import javax.persistence.Table;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "Cidade")
 public class Cidade implements Serializable {
@@ -56,6 +58,7 @@ public class Cidade implements Serializable {
 		this.nome = nome;
 	}
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "estado_id")
 	public Estado getEstado() {

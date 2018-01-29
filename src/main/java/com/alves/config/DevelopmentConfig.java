@@ -109,9 +109,9 @@ public class DevelopmentConfig {
 		Estado est1 = new Estado(null, "Minas Gerais");
 		Estado est2 = new Estado(null, "São Paulo");
 
-		Cidade cid1 = new Cidade(null, "Campinas", est2);
+		Cidade cid1 = new Cidade(null, "Santos", est2);
 		Cidade cid2 = new Cidade(null, "Belo Horizonte", est1);
-		Cidade cid3 = new Cidade(null, "Santos", est2);
+		Cidade cid3 = new Cidade(null, "Campinas", est2);
 
 		Cliente cli1 = new Cliente(null, "Maria", "marcello_doalves@hotmail.com", "1112223334445", TipoCliente.PESSOAFISICA, passwordEncoder.encode("123"));
 		cli1.getTelefones().addAll(Arrays.asList("99998888", "98989898"));
