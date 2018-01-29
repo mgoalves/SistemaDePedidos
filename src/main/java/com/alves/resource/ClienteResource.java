@@ -111,9 +111,9 @@ public class ClienteResource {
 	// Buscar por Email - GET -----------------------------------------
 	@GetMapping
 	@RequestMapping("/email")
-	public ResponseEntity<ClienteDTO> findOne(@RequestParam("value") String email) {
+	public ResponseEntity<Cliente> findOne(@RequestParam("value") String email) {
 
 		Cliente cliente = clienteService.findByEmail(email);
-		return ResponseEntity.ok(new ClienteDTO(cliente));
+		return ResponseEntity.ok(cliente);
 	}
 }
