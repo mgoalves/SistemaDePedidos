@@ -3,6 +3,12 @@ package com.alves.exception.handler;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Possui lista de erros para formulários - Vários campos
+ * 
+ * @author alves
+ *
+ */
 public class ValidationError extends StandardError {
 
 	private static final long serialVersionUID = 1L;
@@ -10,11 +16,11 @@ public class ValidationError extends StandardError {
 	List<FieldMessage> erros = new ArrayList<>();
 	
 	//Contrutores -------------------------------
-	public ValidationError(Integer status, String msg, Long timeStamp) {
-		super(status, msg, timeStamp);
-	}
 	public ValidationError() {
 		super();
+	}
+	public ValidationError(Long timestamp, Integer status, String error, String message, String path) {
+		super(timestamp, status, error, message, path);
 	}
 
 	//Get and Set --------------------------------

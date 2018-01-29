@@ -2,6 +2,12 @@ package com.alves.exception.handler;
 
 import java.io.Serializable;
 
+/**
+ * Classe que é resposavel por guardar os dados de validações de campos
+ * 
+ * @author alves
+ *
+ */
 public class FieldMessage implements Serializable {
 
 	private static final long serialVersionUID = 1L;

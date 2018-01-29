@@ -5,46 +5,66 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+/**
+ * Classe de erro personalizado seguindo metricas do framework
+ * 
+ * @author alves
+ *
+ */
 public class StandardError implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
-	
-	//Atributos
-	private Integer status;
-	private String msg;
-	
+
+	// Atributos ------------------------------------
 	@JsonFormat(pattern = "dd/MM/yy hh:mm")
-	private Date timeStamp;
-	
-	
-	//Contructor
-	public StandardError(Integer status, String msg, Long timeStamp) {
-		super();
-		this.status = status;
-		this.msg = msg;
-		this.timeStamp = new Date(timeStamp);
-	}
+	private Date timestamp;
+	private Integer status;
+	private String error;
+	private String message;
+	private String path;
+
+	// Contructor ------------------------------------
 	public StandardError() {
 	}
+	public StandardError(Long timestamp, Integer status, String error, String message, String path) {
+		super();
+		this.timestamp = new Date(timestamp);
+		this.status = status;
+		this.error = error;
+		this.message = message;
+		this.path = path;
+	}
 
 
-	//Getters and Setters
-	public int getStatus() {
+	// Getters and Setters -------------------------------
+	public Date getTimestamp() {
+		return timestamp;
+	}
+	public void setTimestamp(Date timestamp) {
+		this.timestamp = timestamp;
+	}
+	public Integer getStatus() {
 		return status;
 	}
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
-	public String getMsg() {
-		return msg;
+	public String getError() {
+		return error;
 	}
-	public void setMsg(String msg) {
-		this.msg = msg;
+	public void setError(String error) {
+		this.error = error;
 	}
-	public Date getTimeStamp() {
-		return timeStamp;
+	public String getMessage() {
+		return message;
 	}
-	public void setTimeStamp(Date timeStamp) {
-		this.timeStamp = timeStamp;
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	public String getPath() {
+		return path;
+	}
+	public void setPath(String path) {
+		this.path = path;
 	}
 }
