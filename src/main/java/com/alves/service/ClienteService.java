@@ -148,7 +148,7 @@ public class ClienteService {
 		image = imageService.cropSquare(image);
 		image = imageService.resize(image);
 		
-		String name = user.getId() + ".jpg";
+		String name = user.getId() + "cli.jpg";
 		
 		InputStream ins = imageService.getInputStream(image, "jpg");
 		

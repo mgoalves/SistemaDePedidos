@@ -3,8 +3,8 @@ package com.alves.exception.handler;
 import javax.management.InvalidAttributeValueException;
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.http.HttpHeaders;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AuthorizationServiceException;
@@ -12,6 +12,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.multipart.MultipartException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.alves.exception.FileException;
@@ -111,6 +112,16 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler {
 	public ResponseEntity<Object> amazonS3Exception(AmazonS3Exception e, HttpServletRequest request, WebRequest res) {
 
 		StandardError error = new StandardError(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(), "Erro para S3 Service", e.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+	}
+	
+	
+	// Trata exceções quando houver tamanho excedido de upload
+	// --------------------------------
+	@org.springframework.web.bind.annotation.ExceptionHandler({ MultipartException.class })
+	public ResponseEntity<Object> multipartException(MultipartException e, HttpServletRequest request, WebRequest res) {
+
+		StandardError error = new StandardError(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(), "Erro de arquivo", "Tamanho máximo de arquivo excedido - 10MB", request.getRequestURI());
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
 	}
 }
